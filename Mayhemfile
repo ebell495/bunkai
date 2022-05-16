@@ -1,0 +1,8 @@
+project: bunkai
+target: bunkai
+duration: 300
+image: ghcr.io/ebell495/bunkai:latest
+
+cmds:
+    - cmd: /bunkai/fuzz/fuzz.py
+      libfuzzer: true
