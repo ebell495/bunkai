@@ -1,7 +1,7 @@
 project: bunkai
-target: bunkai
-duration: 300
-image: ghcr.io/ebell495/bunkai:latest
+target: fuzz
+
+tests: null
 
 cmds:
     - cmd: /bunkai/fuzz/fuzz.py
