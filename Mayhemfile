@@ -1,8 +1,8 @@
 project: bunkai
 target: fuzz
 
-tests: null
+testsuite: null
 
 cmds:
-    - cmd: /bunkai/fuzz/fuzz.py
+    - cmd: python3 fuzz/fuzz.py
       libfuzzer: true

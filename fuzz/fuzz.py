@@ -1,43 +1,38 @@
-#!/bin/python3
+#!/usr/local/bin/python3 
 
 import atheris
 import sys
-from janome import *
 
 # with atheris.instrument_imports():
 from bunkai import Bunkai
 from bunkai.algorithm.bunkai_sbd.bunkai_sbd import BunkaiSentenceBoundaryDisambiguation
 
+bun = Bunkai()
+bun1 = BunkaiSentenceBoundaryDisambiguation(path_model=None)
 
 @atheris.instrument_func
 def TestOneInput(data):
-    barray = bytearray(data)
-    if len(barray) > 0:
-        if barray[0] % 5 == 0:
-            del barray[0]
-            bunkai = Bunkai()
-            bunkai(str(barray))
-        elif barray[0] % 5 == 1:
-            del barray[0]
-            bunkai = BunkaiSentenceBoundaryDisambiguation(path_model=None)
-            bunkai(str(barray))
-        elif barray[0] % 5 == 2:
-            del barray[0]
-            bunkai = BunkaiSentenceBoundaryDisambiguation(path_model=None)
-            bunkai.find_eos(str(barray))
-        elif barray[0] % 5 == 3:
-            del barray[0]
-            bunkai = BunkaiSentenceBoundaryDisambiguation(path_model=None)
-            an_obj = bunkai.eos(str(barray))
-            layers = an_obj.get_morph_analysis()
-        else:
-            del barray[0]
-            bunkai = BunkaiSentenceBoundaryDisambiguation(path_model=None)
-            an_obj = bunkai.eos(str(barray))
-            layers = an_obj.available_layers()
+    fdp = atheris.FuzzedDataProvider(data)
+
+    if len(data) < 1:
+        return
+
+    option = fdp.ConsumeBytes(1)[0]
+    in_string = fdp.ConsumeUnicodeNoSurrogates(len(data))
+
+    if option % 5 == 0:
+        bun(in_string)
+    elif option % 5 == 1:
+        bun1(in_string)
+    elif option % 5 == 2:
+        bun1.find_eos(in_string)
+    elif option % 5 == 3:
+        an_obj = bun1.eos(in_string)
+        layers = an_obj.get_morph_analysis()
     else:
-        bunkai = Bunkai()
-        bunkai(str(barray))
+        an_obj = bun1.eos(in_string)
+        layers = an_obj.available_layers()
+
 
 atheris.instrument_all()
 atheris.Setup(sys.argv, TestOneInput)
