@@ -1,8 +1,6 @@
 project: bunkai
-target: fuzz
-
-testsuite: null
+target: morphological_analysis_fuzz
 
 cmds:
-    - cmd: python3 fuzz/fuzz.py
+    - cmd: python3 fuzz/morphological_analysis_fuzz.py
       libfuzzer: true

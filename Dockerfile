@@ -27,4 +27,4 @@ WORKDIR /bunkai
 RUN ~/.poetry/bin/poetry build && pip3 install dist/*.whl
 
 # Allow the fuzzer to be able to execute
-RUN chmod +x fuzz/fuzz.py
+RUN chmod +x fuzz/morphological_analysis_fuzz.py
