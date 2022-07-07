@@ -1,6 +1,6 @@
 project: bunkai
-target: morphological_analysis_fuzz
+target: morphological-analysis-fuzz
 
 cmds:
-    - cmd: python3 fuzz/morphological_analysis_fuzz.py
+    - cmd: python3 fuzz/morphological-analysis-fuzz.py
       libfuzzer: true
