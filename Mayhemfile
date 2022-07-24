@@ -2,5 +2,5 @@ project: bunkai
 target: morphological-analysis-fuzz
 
 cmds:
-    - cmd: fuzz/morphological-analysis-fuzz.py
+    - cmd: ./fuzz/morphological-analysis-fuzz.py
       libfuzzer: true
